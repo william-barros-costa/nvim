@@ -4,6 +4,8 @@
 ```bash
 curl -o ~/.ssh/gitkey https://raw.githubusercontent.com/william-barros-costa/ansible/master/.ssh/id_ed25519
 chmod 600 ~/.ssh/gitkey
+yay ansible
+ansible-vault decrypt ~/.ssh/gitkey
 ssh -T git@github.com
 ```
 
