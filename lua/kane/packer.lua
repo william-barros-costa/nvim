@@ -33,10 +33,13 @@ return require('packer').startup(function(use)
 
   use('nvim-treesitter/nvim-treesitter', { run= ':tsupdate'})
   use('nvim-treesitter/playground')
+  use('img-paste-devs/img-paste.vim')
   use('theprimeagen/harpoon')
   use('mbbill/undotree')
   use('tpope/vim-fugitive')
-
+  use('vimwiki/vimwiki')
+  use('godlygeek/tabular')
+  use('preservim/vim-markdown')
   use {
 	  'VonHeikemen/lsp-zero.nvim',
 	  branch = 'v3.x',
