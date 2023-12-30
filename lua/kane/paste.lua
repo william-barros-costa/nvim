@@ -6,8 +6,10 @@ function remove_html_tags(html)
 -- Remove all HTML tags except for <a> tags
   local cleaned_html = string.gsub(html, "<([^>]+)>", function(match)
     if string.match(match, "^a%s") then
-	return string.gsub(match, "a%s+href=[\"'](.-)[\"'][^>]*", "[%1][")
+	-- Converts a href="url" into (url)[
+	return string.gsub(match, "a%s+href=[\"'](.-)[\"'][^>]*", "(%1)[")
     elseif string.match(match, "^/a%s*") then
+	-- Adds the ] after the content of a <a> tag
 	return "]"
     else
       return ""    -- Remove other tags
@@ -20,7 +22,15 @@ function remove_html_tags(html)
   -- Remove unnecessary spaces
   cleaned_html = cleaned_html:gsub("%s+", " ")
 
+  print( cleaned_html)
   return cleaned_html
+end
+
+function switch_url_with_text(input)
+	-- Converts (a)[b] to [b](a)
+	local correct_format = string.gsub(input, "%((.-)%)%[(.-)%]", "[%2](%1)")
+	print(correct_format)
+	return correct_format
 end
 
 function paste_markdown_url()
@@ -28,7 +38,7 @@ function paste_markdown_url()
 	if filetype == 'markdown' or filetype == 'mkd' or filetype == 'md' or filetype == 'vimwiki' then
 		local clipboard_content = vim.fn.system('xclip -o -selection clipboard -t text/html')
 		if clipboard_content ~= '' then
-			vim.fn.setreg('+', remove_html_tags(clipboard_content))
+			vim.fn.setreg('+', switch_url_with_text(remove_html_tags(clipboard_content)))
 			vim.cmd('normal! "+p')
 		else
 			print('Clipboard does not contain a valid URL')
