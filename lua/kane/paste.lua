@@ -1,7 +1,3 @@
-function get_clipboard_url()
-	return string.gsub(command_output, '\n', '')
-end
-
 function remove_html_tags(html)
 -- Remove all HTML tags except for <a> tags
   local cleaned_html = string.gsub(html, "<([^>]+)>", function(match)
@@ -39,15 +35,14 @@ function paste_markdown_url()
 		local clipboard_content = vim.fn.system('xclip -o -selection clipboard -t text/html')
 		if clipboard_content ~= '' then
 			vim.fn.setreg('+', switch_url_with_text(remove_html_tags(clipboard_content)))
-			vim.cmd('normal! "+p')
 		else
 			print('Clipboard does not contain a valid URL')
 		end
 	else
 		print('Not in a Markdow File')
 	end
+	vim.cmd('normal! "+p')
 end
 
---vim.cmd([[autocmd! TextYankPost * lua paste_markdown_url()]]) 
-vim.keymap.set('i', '<C-S-v>', ':lua paste_markdown_url()<CR>')
+vim.keymap.set('i', '<C-V>', ':lua paste_markdown_url()<CR>', {noremap=true, silent = true})
 
