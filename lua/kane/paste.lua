@@ -44,5 +44,5 @@ function paste_markdown_url()
 	vim.cmd('normal! "+p')
 end
 
-vim.keymap.set('i', '<C-V>', ':lua paste_markdown_url()<CR>', {noremap=true, silent = true})
+vim.keymap.set('i', '<C-V>', paste_markdown_url, {noremap=true, silent = false})
 
