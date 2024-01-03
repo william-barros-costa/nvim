@@ -19,7 +19,16 @@ local packer_bootstrap = ensure_packer()
 return require('packer').startup(function(use)
   -- packer can manage itself
   use 'wbthomason/packer.nvim'
-
+use {
+  "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    requires = { 
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+    }
+  }
   use {
   'nvim-telescope/telescope.nvim', tag = '0.1.5',
 -- or                            , branch = '0.1.x',
@@ -33,6 +42,10 @@ return require('packer').startup(function(use)
 
   use('nvim-treesitter/nvim-treesitter', { run= ':tsupdate'})
   use('nvim-treesitter/playground')
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = function() vim.fn["mkdp#util#install"]() end,
+})
   use('img-paste-devs/img-paste.vim')
   use('theprimeagen/harpoon')
   use('mbbill/undotree')
@@ -40,7 +53,8 @@ return require('packer').startup(function(use)
   use('vimwiki/vimwiki')
   use('godlygeek/tabular')
   use('preservim/vim-markdown')
-  use {
+  use('tpope/vim-commentary')
+ use {
 	  'VonHeikemen/lsp-zero.nvim',
 	  branch = 'v3.x',
 	  requires = {
