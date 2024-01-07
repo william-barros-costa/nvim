@@ -12,9 +12,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("vim-options")
+require("paste")
 require("lazy").setup('plugins')
 
-vim.keymap.set('n', '<leader>b', function()
-  print(vim.api.nvim_buf_get_option(0, 'filetype'))
-  
-end, {})

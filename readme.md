@@ -16,6 +16,6 @@ git clone git@github.com:william-barros-costa/nvim.git
 nvim .
 ```
 
-3. Use Netrw to go to .config/nvim/lua/kane/packer.lua
-4. Run `:so`
-5. Run `:PackerInstall`
+1. Use Netrw to go to .config/nvim/lua/kane/packer.lua
+2. Run `:so`
+3. Run `:PackerInstall`

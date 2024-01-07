@@ -1,0 +1,7 @@
+{
+  "code": {
+    "prefix": "jcode",
+    "body": ["```javascript\n$0\n```"],
+    "description": "Creates a javascript code block"
+  }
+}
