@@ -1,7 +1,17 @@
 {
-  "code": {
+  "jcode": {
     "prefix": "jcode",
     "body": ["```javascript\n$0\n```"],
     "description": "Creates a javascript code block"
-  }
+  },
+ "pcode": {
+    "prefix": "pcode",
+    "body": ["```python\n$0\n```"],
+    "description": "Creates a python code block"
+  }, 
+ "bcode":{
+    "prefix": "bcode",
+    "body": ["```bash\n$0\n```"],
+    "description": "Creates a bash code block"
+  } 
 }
