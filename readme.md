@@ -19,3 +19,5 @@ nvim .
 1. Use Netrw to go to .config/nvim/lua/kane/packer.lua
 2. Run `:so`
 3. Run `:PackerInstall`
+
+
