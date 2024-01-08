@@ -13,7 +13,7 @@ return {
 		"hrsh7th/nvim-cmp",
 		config = function()
 			local cmp = require("cmp")
-			require("luasnip.loaders.from_vscode").lazy_load({ paths = '~/.config/nvim/lua/custom-snippets' })
+      require("luasnip.loaders.from_vscode").lazy_load({ paths = '~/.config/nvim/lua/custom-snippets' })
 
 			cmp.setup({
 				snippet = {
