@@ -3,7 +3,7 @@ local telescope = require('telescope')
 local function download_and_save_image(url, name)
 	local extension = url:match("^.+%.(.+)$")
 	local filename = vim.fn.expand("%:t"):match("^(.-)%.%w+$") .. "_" .. name:gsub(" ", "_") .. "." .. extension
-	local folder = vim.fn.getcwd() .. "/img/"
+	local folder = "./img/"
   vim.fn.mkdir(folder, 'p')
 	local handle = io.popen("curl -s -o " .. folder .. filename .. " " .. url)
 	handle:close()
@@ -14,16 +14,20 @@ local function remove_html_tags(html)
 	-- Remove all HTML tags except for <a> tags
 	local cleaned_html = string.gsub(html, "<([^>]+)>", function(match)
 		if string.match(match, "^img%s") then
-			local url = string.gsub(match, "img[^>]src=[\"'](.-)[\"'][^>]*", "%1")
-			local name = string.gsub(match, "img[^>]*alt=[\"'](.-)[\"'][^>]*", "%1")
+			local url = string.gsub(match, ".*src=([\"'])(.-)%1.*", "%2")
+			local name, count = string.gsub(match, "img[^>]*alt=[\"'](.-)[\"'][^>]*", "%1")
+      if count == 0 then
+        name = url:gsub('$/', "")
+        name = name:match('.+/(.-)%.%w+$')
+      end
 			local filelocation = download_and_save_image(url, name)
 			return "\n![" .. name .. "](" .. filelocation .. ")\n"
 		elseif string.match(match, "^a%s") then
 			-- Converts a href="url" into (url)[
-			return string.gsub(match, "a%s+href=[\"'](.-)[\"'][^>]*", "(%1)[")
+			return string.gsub(match, "a%s+href=[\"'](.-)[\"'][^>]*", " (%1)[")
 		elseif string.match(match, "^/a%s*") then
 			-- Adds the ] after the content of a <a> tag
-			return "]"
+			return "] "
     elseif string.match(match, "^h[1-6]%s*") then
       local header_level = string.match(match, "^h([1-6])%s*")
       return "\n"..string.rep("#", tonumber(header_level)-1).." "
@@ -45,8 +49,8 @@ local function remove_html_tags(html)
 end
 
 local function switch_url_with_text(input)
-	-- Converts (a)[b] to [b](a)
-	local correct_format = string.gsub(input, "%((.-)%)%[(.-)%]", "[%2](%1)")
+	-- Converts (a)[b] to [b](a):
+	local correct_format = string.gsub(input, "%((.-?)%)%s*%[(.-?)%]", "[%2](%1)")
 	return correct_format
 end
 
@@ -70,5 +74,9 @@ vim.keymap.set("n", "<leader>mp", paste_markdown_url, { noremap = true, silent =
 function test()
   paste_markdown_url()
 end
+
+
+
+
 
 
