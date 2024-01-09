@@ -6,12 +6,13 @@ vim.cmd("set clipboard^=unnamed,unnamedplus")
 vim.cmd("set number relativenumber")
 vim.g.mapleader = " "
 vim.g.mdip_imgdir = "img"
+vim.g.python3_host_prog = '~/.config/nvim/.env/bin/python'
 
 -- Saves when Leaving insert
 vim.api.nvim_command([[autocmd InsertLeave * :silent! wa]])
-vim.api.nvim_command(
-  [[autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>]]
-)
+--vim.api.nvim_command(
+--  [[autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>]]
+--)
 
 -- Changing key binds
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
