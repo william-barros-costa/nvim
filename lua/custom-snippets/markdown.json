@@ -13,5 +13,10 @@
     "prefix": "bcode",
     "body": ["```bash\n$0\n```"],
     "description": "Creates a bash code block"
-  } 
+  },
+ "hcode":{
+    "prefix": "hcode",
+    "body": ["```html\n$0\n```"],
+    "description": "Creates an html code block"
+  }
 }
