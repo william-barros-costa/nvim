@@ -55,19 +55,22 @@ end
 local function paste_markdown_url()
   local filetype = vim.bo.filetype
   if filetype == "markdown" or filetype == "mkd" or filetype == "md" or filetype == "vimwiki" then
+    local clipboard_content = ""
     if vim.fn.executable('xclip') == 1 then
-      local clipboard_content = vim.fn.system('xclip -o -selection clipboard -t text/html')
+      clipboard_content = vim.fn.system('xclip -o -selection clipboard -t text/html')
     else
-      local clipboard_content = vim.fn.input('What is the string to paste?')
+      clipboard_content = vim.fn.input('What is the string to paste?')
     end
+    print(clipboard_content)
     if clipboard_content ~= "" then
+
       vim.fn.setreg("a", switch_url_with_text(remove_html_tags(clipboard_content)))
     else
       print("Clipboard does not contain a valid URL")
     end
     --	else
     --		print("Not in a Markdown File")
-  end
+   end
   vim.cmd('normal! "ap')
 end
 
@@ -76,3 +79,4 @@ vim.keymap.set("n", "<leader>mp", paste_markdown_url, { noremap = true, silent =
 function test()
   paste_markdown_url()
 end
+
