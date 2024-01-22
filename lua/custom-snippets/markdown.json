@@ -18,5 +18,10 @@
     "prefix": "hcode",
     "body": ["```html\n$0\n```"],
     "description": "Creates an html code block"
+  }, 
+ "scode":{
+    "prefix": "scode",
+    "body": ["```sql\n$0\n```"],
+    "description": "Creates an sql code block" 
   }
 }
