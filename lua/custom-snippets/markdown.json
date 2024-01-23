@@ -1,32 +1,32 @@
 {
   "jcode": {
     "prefix": "jcode",
-    "body": ["```javascript\n$0\n```"],
+    "body": ["```javascript\n$1\n```\n$0"],
     "description": "Creates a javascript code block"
   },
  "pcode": {
     "prefix": "pcode",
-    "body": ["```python\n$0\n```"],
+    "body": ["```python\n$1\n```\n$0"],
     "description": "Creates a python code block"
   }, 
  "bcode":{
     "prefix": "bcode",
-    "body": ["```bash\n$0\n```"],
+    "body": ["```bash\n$1\n```\n$0"],
     "description": "Creates a bash code block"
   },
  "hcode":{
     "prefix": "hcode",
-    "body": ["```html\n$0\n```"],
+    "body": ["```html\n$1\n```\n$0"],
     "description": "Creates an html code block"
   }, 
   "scode":{
     "prefix": "scode",
-    "body": ["```sql\n$1\n$0```"],
+    "body": ["```sql\n$1\n```\n$0"],
     "description": "Creates an sql code block" 
   },
   "list-title":{ 
-      "prefix": "-*",
-      "body": ["- *$1:* $0"],
+      "prefix": "-**",
+      "body": ["- **$1:** $0"],
       "description": "Creates a List with title item" 
     }
 }
