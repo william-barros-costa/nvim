@@ -19,9 +19,14 @@
     "body": ["```html\n$0\n```"],
     "description": "Creates an html code block"
   }, 
- "scode":{
+  "scode":{
     "prefix": "scode",
-    "body": ["```sql\n$0\n```"],
+    "body": ["```sql\n$1\n$0```"],
     "description": "Creates an sql code block" 
-  }
+  },
+  "list-title":{ 
+      "prefix": "-*",
+      "body": ["- *$1:* $0"],
+      "description": "Creates a List with title item" 
+    }
 }
