@@ -24,9 +24,39 @@
     "body": ["```sql\n$1\n```\n$0"],
     "description": "Creates an sql code block" 
   },
+  "phcode":{ 
+      "prefix": "phcode",
+      "body": ["```php\n$1\n```\n$0"],
+      "description": "Creates a php code block" 
+    },
   "list-title":{ 
       "prefix": "-**",
       "body": ["- **$1:** $0"],
       "description": "Creates a List with title item" 
-    }
+    },
+  "bold":{ 
+      "prefix": "**",
+      "body": ["**$1** $0"],
+      "description": "Creates a bold block" 
+    },
+    "HTTP": {
+      "prefix": "http",
+      "body": ["HTTP"],
+      "description": "HTTP snippet" 
+    },
+    "application": {
+    "prefix": "app",
+    "body": ["$1pplication $0"],
+    "description": "Application snippet"
+  },
+    "HTML": {
+    "prefix": "html",
+    "body": ["HTML"],
+    "description": "HTML snippet"
+  },
+    "SQL": {
+    "prefix": "sql",
+    "body": ["SQL"],
+    "description": "SQL snippet"
+  }
 }
