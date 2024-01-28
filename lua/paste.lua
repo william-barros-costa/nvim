@@ -1,9 +1,9 @@
 local function download_and_save_image(url, name)
 	local extension = url:match("^.+%.(.+)$")
-	local filename = vim.fn.expand("%:t"):match("^(.-)%.%w+$") .. "_" .. name:gsub(" ", "_") .. "." .. extension
+	local filename = vim.fn.expand("%:t"):match("^(.-)%.%w+$"):gsub(" ", "_") .. "_" .. name:gsub(" ", "_") .. "." .. extension
 	local folder = "./img/"
 	vim.fn.mkdir(folder, "p")
-	local handle = io.popen("curl -s -o " .. folder .. filename .. " " .. url)
+	local handle = io.popen("curl -s -o '" .. folder .. filename .. "' " .. url)
 	handle:close()
 	return folder .. filename
 end
@@ -54,15 +54,13 @@ end
 
 local function paste_markdown_url()
 	local filetype = vim.bo.filetype
-	if filetype == "markdown" or filetype == "mkd" or filetype == "md" or filetype == "vimwiki" then
+	-- if filetype == "markdown" or filetype == "mkd" or filetype == "md" or filetype == "vimwiki" then
 		local clipboard_content = ""
 		if vim.fn.executable("xclip") == 1 then
-			print("Xclip executable")
 			clipboard_content = vim.fn.system("xclip -o -selection clipboard -t text/html")
 		else
 			clipboard_content = vim.fn.input("What is the string to paste?")
 		end
-		print(clipboard_content)
 		if clipboard_content ~= "" then
 			vim.fn.setreg("a", switch_url_with_text(remove_html_tags(clipboard_content)))
 		else
@@ -70,7 +68,7 @@ local function paste_markdown_url()
 		end
 		--	else
 		--		print("Not in a Markdown File")
-	end
+	-- end
 	vim.cmd('normal! "aP')
 end
 
@@ -79,4 +77,5 @@ vim.keymap.set("n", "<leader>mp", paste_markdown_url, { noremap = true, silent =
 function test()
 	paste_markdown_url()
 end
+
 
