@@ -1,6 +1,13 @@
+local file_path = "/root/example.txt"
+local last_mtime = vim.fn.getftime(file_path)
+
 local function download_and_save_image(url, name)
 	local extension = url:match("^.+%.(.+)$")
-	local filename = vim.fn.expand("%:t"):match("^(.-)%.%w+$"):gsub(" ", "_") .. "_" .. name:gsub(" ", "_") .. "." .. extension
+	local filename = vim.fn.expand("%:t"):match("^(.-)%.%w+$"):gsub(" ", "_")
+		.. "_"
+		.. name:gsub(" ", "_")
+		.. "."
+		.. extension
 	local folder = "./img/"
 	vim.fn.mkdir(folder, "p")
 	local handle = io.popen("curl -s -o '" .. folder .. filename .. "' " .. url)
@@ -52,13 +59,25 @@ local function switch_url_with_text(input)
 	return correct_format
 end
 
+local function read_file()
+	local file, err = io.open(file_path, "r")
+	if err then
+		print("Error opening file: " .. err)
+		return ""
+	end
+
+	local file_conent = file:read("*a")
+	file:close()
+	return file_conent
+end
+
 local function paste_markdown_url()
 	local filetype = vim.bo.filetype
-	-- if filetype == "markdown" or filetype == "mkd" or filetype == "md" or filetype == "vimwiki" then
+	if vim.fn.getreg('a') == "" and (filetype == "markdown" or filetype == "mkd" or filetype == "md" or filetype == "vimwiki") then
 		local clipboard_content = ""
 		if vim.fn.executable("xclip") == 1 then
 			clipboard_content = vim.fn.system("xclip -o -selection clipboard -t text/html")
-		else
+    else
 			clipboard_content = vim.fn.input("What is the string to paste?")
 		end
 		if clipboard_content ~= "" then
@@ -66,10 +85,9 @@ local function paste_markdown_url()
 		else
 			print("Clipboard does not contain a valid URL")
 		end
-		--	else
-		--		print("Not in a Markdown File")
-	-- end
+	end
 	vim.cmd('normal! "aP')
+  vim.fn.setreg('a', '')
 end
 
 vim.keymap.set("n", "<leader>mp", paste_markdown_url, { noremap = true, silent = false })
@@ -77,5 +95,31 @@ vim.keymap.set("n", "<leader>mp", paste_markdown_url, { noremap = true, silent =
 function test()
 	paste_markdown_url()
 end
+
+function create_empty_file()
+  io.open(file_path, "w"):close() 
+end
+
+function CheckFileChage()
+	if vim.fn.filereadable(file_path) == 1 then
+		local current_mtime = vim.fn.getftime(file_path)
+
+		if current_mtime ~= last_mtime then
+      local clipboard_content = read_file()
+
+      if clipboard_content == "" then
+        return
+      end
+
+      vim.fn.setreg("a", switch_url_with_text(remove_html_tags(clipboard_content)))
+      create_empty_file()
+      last_mtime = vim.fn.getftime(file_path)
+    end
+	end
+end
+
+local timer = vim.loop.new_timer()
+timer:start(1000, 1000, vim.schedule_wrap(CheckFileChage))
+
 
 
