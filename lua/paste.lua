@@ -1,5 +1,6 @@
 local file_path = "/root/example.txt"
 local last_mtime = vim.fn.getftime(file_path)
+vim.fn.setreg("a", "")
 
 local function download_and_save_image(url, name)
 	local extension = url:match("^.+%.(.+)$")
@@ -73,11 +74,14 @@ end
 
 local function paste_markdown_url()
 	local filetype = vim.bo.filetype
-	if vim.fn.getreg('a') == "" and (filetype == "markdown" or filetype == "mkd" or filetype == "md" or filetype == "vimwiki") then
+	if
+		vim.fn.getreg("a") == ""
+		and (filetype == "markdown" or filetype == "mkd" or filetype == "md" or filetype == "vimwiki")
+	then
 		local clipboard_content = ""
 		if vim.fn.executable("xclip") == 1 then
 			clipboard_content = vim.fn.system("xclip -o -selection clipboard -t text/html")
-    else
+		else
 			clipboard_content = vim.fn.input("What is the string to paste?")
 		end
 		if clipboard_content ~= "" then
@@ -87,7 +91,7 @@ local function paste_markdown_url()
 		end
 	end
 	vim.cmd('normal! "aP')
-  vim.fn.setreg('a', '')
+	vim.fn.setreg("a", "")
 end
 
 vim.keymap.set("n", "<leader>mp", paste_markdown_url, { noremap = true, silent = false })
@@ -97,7 +101,7 @@ function test()
 end
 
 function create_empty_file()
-  io.open(file_path, "w"):close() 
+	io.open(file_path, "w"):close()
 end
 
 function CheckFileChage()
@@ -105,21 +109,19 @@ function CheckFileChage()
 		local current_mtime = vim.fn.getftime(file_path)
 
 		if current_mtime ~= last_mtime then
-      local clipboard_content = read_file()
+			local clipboard_content = read_file()
 
-      if clipboard_content == "" then
-        return
-      end
+			if clipboard_content == "" then
+				return
+			end
 
-      vim.fn.setreg("a", switch_url_with_text(remove_html_tags(clipboard_content)))
-      create_empty_file()
-      last_mtime = vim.fn.getftime(file_path)
-    end
+			vim.fn.setreg("a", switch_url_with_text(remove_html_tags(clipboard_content)))
+			create_empty_file()
+			last_mtime = vim.fn.getftime(file_path)
+		end
 	end
 end
 
 local timer = vim.loop.new_timer()
 timer:start(1000, 1000, vim.schedule_wrap(CheckFileChage))
-
-
 

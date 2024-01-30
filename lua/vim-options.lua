@@ -16,3 +16,7 @@ vim.keymap.set("n", "<C-b>", "<C-v>")
 
 vim.keymap.set("n", "H", "<cmd>bp<cr>")
 vim.keymap.set("n", "L", "<cmd>bn--<cr>")
+
+-- Insert mode
+vim.keymap.set("i", "zz", "<Esc>zza")
+
