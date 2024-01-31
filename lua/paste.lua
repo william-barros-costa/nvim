@@ -11,12 +11,40 @@ local function download_and_save_image(url, name)
 		.. extension
 	local folder = "./img/"
 	vim.fn.mkdir(folder, "p")
+	print(folder .. filename)
+	print(url)
 	local handle = io.popen("curl -s -o '" .. folder .. filename .. "' " .. url)
 	handle:close()
 	return folder .. filename
 end
 
+local function encode_characters(html)
+	local in_string = false
+	local cleaned_html = ""
+
+	for i = 1, #html do
+		local char = html:sub(i, i)
+
+		if char == '"' then
+			in_string = not in_string -- toggle in_string flag when encountering double quotes
+		end
+
+		if not in_string then
+			cleaned_html = cleaned_html .. char -- append character to cleaned_html
+		else
+			if char == "<" then
+				char = "&lt;" -- replace '<' with HTML entity
+			elseif char == ">" then
+				char = "&gt;" -- replace '>' with HTML entity
+			end
+			cleaned_html = cleaned_html .. char -- append character to cleaned_html
+		end
+	end
+	return cleaned_html
+end
+
 local function remove_html_tags(html)
+  html = encode_characters(html)
 	-- Remove all HTML tags except for <a> tags
 	local cleaned_html = string.gsub(html, "<([^>]+)>", function(match)
 		if string.match(match, "^img%s") then
@@ -26,6 +54,8 @@ local function remove_html_tags(html)
 				name = url:gsub("$/", "")
 				name = name:match(".+/(.-)%.%w+$")
 			end
+			print(url, name)
+			print(match)
 			local filelocation = download_and_save_image(url, name)
 			return "\n![" .. name .. "](" .. filelocation .. ")\n"
 		elseif string.match(match, "^a%s") then
@@ -124,4 +154,3 @@ end
 
 local timer = vim.loop.new_timer()
 timer:start(1000, 1000, vim.schedule_wrap(CheckFileChage))
-
