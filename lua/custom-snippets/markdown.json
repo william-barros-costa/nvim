@@ -49,6 +49,21 @@
     "body": ["$1pplication $0"],
     "description": "Application snippet"
   },
+    "MySQL": {
+    "prefix": "mysql",
+    "body": ["MySQL"],
+    "description": "MySQL snippet"
+  },
+    "list-title2": {
+    "prefix": "**:",
+    "body": ["**$1:** $0"],
+    "description": "Creates a List with title item"
+  },
+    "DBMS": {
+    "prefix": "dbms",
+    "body": ["DBMS"],
+    "description": "DBMS Snippet"
+  },
     "HTML": {
     "prefix": "html",
     "body": ["HTML"],
