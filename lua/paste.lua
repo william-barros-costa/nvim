@@ -1,4 +1,5 @@
-local file_path = "/root/example.txt"
+local file_path = "/root/.config/nvim/lua/temp/clipboard.txt"
+local image_path = "/root/.config/nvim/lua/temp/image.png"
 local last_mtime = vim.fn.getftime(file_path)
 vim.fn.setreg("a", "")
 
@@ -14,6 +15,15 @@ local function download_and_save_image(url, name)
   print(folder .. filename)
   print(url)
   local handle = io.popen("curl -s -o '" .. folder .. filename .. "' " .. url)
+  handle:close()
+  return folder .. filename
+end
+
+local function save_image(name)
+  local filename = vim.fn.expand("%:t"):match("^(.-)%.%w+$"):gsub(" ", "_") .. "_" .. name:gsub(" ", "_") .. ".png"
+  local folder = "./img/"
+  vim.fn.mkdir(folder, "p")
+  local handle = io.popen("cp '" .. image_path.. "' '" .. folder .. filename .. "'")
   handle:close()
   return folder .. filename
 end
@@ -64,6 +74,10 @@ local function remove_html_tags(html)
       return "] "
     elseif string.match(match, "/?code%s*") then
       return "`"
+    elseif string.match(match, "^local%-image") then
+      local name = vim.fn.input("What is the image name? ")
+      local filelocation = save_image(name)
+      return "\n![" .. name .. "](" .. filelocation .. ")\n"
     elseif string.match(match, "^h[1-6]%s*") then
       local header_level = string.match(match, "^h([1-6])%s*")
       return "\n" .. string.rep("#", tonumber(header_level) - 1) .. " "
