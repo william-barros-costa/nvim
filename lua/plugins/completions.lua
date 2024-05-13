@@ -34,13 +34,11 @@ return {
         },
         mapping = cmp.mapping.preset.insert({
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-          ["<Esc>"] = cmp.mapping(function (fallback)
-            if cmp.visible() then
-              cmp.abort()
-            else
-              vim.cmd('stopinsert')
-            end
-          end),
+--          ["<S-E>"] = cmp.mapping(function ()
+--            if cmp.visible() then
+--              cmp.abort()
+--            end
+--          end),
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()

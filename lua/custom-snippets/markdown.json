@@ -14,6 +14,11 @@
     "body": ["```bash\n$1\n```\n$0"],
     "description": "Creates a bash code block"
   },
+ "xcode":{
+    "prefix": "xcode",
+    "body": ["```xml\n$1\n```\n$0"],
+    "description": "Creates an xml code block"
+  },
  "hcode":{
     "prefix": "hcode",
     "body": ["```html\n$1\n```\n$0"],
@@ -46,7 +51,7 @@
     },
     "application": {
     "prefix": "app",
-    "body": ["$1pplication $0"],
+    "body": ["$1pplication$0"],
     "description": "Application snippet"
   },
     "MySQL": {

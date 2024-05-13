@@ -1,6 +1,7 @@
 local file_path = "/root/.config/nvim/lua/temp/clipboard.txt"
 local image_path = "/root/.config/nvim/lua/temp/image.png"
 local last_mtime = vim.fn.getftime(file_path)
+local running = false
 vim.fn.setreg("a", "")
 
 local function download_and_save_image(url, name)
@@ -55,6 +56,7 @@ end
 
 local function remove_html_tags(html)
   html = encode_characters(html)
+  print(html)
   -- Remove all HTML tags except for <a> tags
   local cleaned_html = string.gsub(html, "<([^>]+)>", function(match)
     if string.match(match, "^img%s") then
@@ -149,21 +151,29 @@ function create_empty_file()
 end
 
 function CheckFileChage()
+  if running then
+    return
+  end
+  running = true
   if vim.fn.filereadable(file_path) == 1 then
     local current_mtime = vim.fn.getftime(file_path)
 
     if current_mtime ~= last_mtime then
       local clipboard_content = read_file()
 
+      print(clipboard_content)
+
       if clipboard_content == "" then
         return
       end
-
+      
+      print(clipboard_content)
       vim.fn.setreg("a", switch_url_with_text(remove_html_tags(clipboard_content)))
       create_empty_file()
       last_mtime = vim.fn.getftime(file_path)
     end
   end
+  running = false
 end
 
 local timer = vim.loop.new_timer()
