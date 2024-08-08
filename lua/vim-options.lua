@@ -39,7 +39,7 @@ local function getEndKey(key)
     ["("] = ")",
   })[key] or extract_tag(key) 
 end
-  
+ 
 
 function SurroundSelection()
   local key = vim.fn.input('Insert surround: ')

@@ -13,8 +13,6 @@ local function download_and_save_image(url, name)
       .. extension
   local folder = "./img/"
   vim.fn.mkdir(folder, "p")
-  print(folder .. filename)
-  print(url)
   local handle = io.popen("curl -s -o '" .. folder .. filename .. "' " .. url)
   handle:close()
   return folder .. filename
