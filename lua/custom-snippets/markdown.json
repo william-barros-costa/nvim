@@ -1,0 +1,82 @@
+{
+  "jcode": {
+    "prefix": "jcode",
+    "body": ["```javascript\n$1\n```\n$0"],
+    "description": "Creates a javascript code block"
+  },
+ "pcode": {
+    "prefix": "pcode",
+    "body": ["```python\n$1\n```\n$0"],
+    "description": "Creates a python code block"
+  }, 
+ "bcode":{
+    "prefix": "bcode",
+    "body": ["```bash\n$1\n```\n$0"],
+    "description": "Creates a bash code block"
+  },
+ "xcode":{
+    "prefix": "xcode",
+    "body": ["```xml\n$1\n```\n$0"],
+    "description": "Creates an xml code block"
+  },
+ "hcode":{
+    "prefix": "hcode",
+    "body": ["```html\n$1\n```\n$0"],
+    "description": "Creates an html code block"
+  }, 
+  "scode":{
+    "prefix": "scode",
+    "body": ["```sql\n$1\n```\n$0"],
+    "description": "Creates an sql code block" 
+  },
+  "phcode":{ 
+      "prefix": "phcode",
+      "body": ["```php\n$1\n```\n$0"],
+      "description": "Creates a php code block" 
+    },
+  "list-title":{ 
+      "prefix": "-**",
+      "body": ["- **$1:** $0"],
+      "description": "Creates a List with title item" 
+    },
+  "bold":{ 
+      "prefix": "**",
+      "body": ["**$1** $0"],
+      "description": "Creates a bold block" 
+    },
+    "HTTP": {
+      "prefix": "http",
+      "body": ["HTTP"],
+      "description": "HTTP snippet" 
+    },
+    "application": {
+    "prefix": "app",
+    "body": ["$1pplication$0"],
+    "description": "Application snippet"
+  },
+    "MySQL": {
+    "prefix": "mysql",
+    "body": ["MySQL"],
+    "description": "MySQL snippet"
+  },
+    "list-title2": {
+    "prefix": "**:",
+    "body": ["**$1:** $0"],
+    "description": "Creates a List with title item"
+  },
+    "DBMS": {
+    "prefix": "dbms",
+    "body": ["DBMS"],
+    "description": "DBMS Snippet"
+  },
+    "HTML": {
+    "prefix": "html",
+    "body": ["HTML"],
+    "description": "HTML snippet"
+  },
+    "SQL": {
+    "prefix": "sql",
+    "body": ["SQL"],
+    "description": "SQL snippet"
+  }
+}
