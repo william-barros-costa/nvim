@@ -10,8 +10,10 @@ return {
         null_ls.builtins.formatting.beautysh,
         null_ls.builtins.formatting.isort,
         null_ls.builtins.diagnostics.eslint,
+        null_ls.builtins.formatting.gofumpt,
+        null_ls.builtins.formatting.goimports_reviser,
       },
     })
-    vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
+    vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, {})
   end,
 }
