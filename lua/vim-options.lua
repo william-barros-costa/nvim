@@ -9,16 +9,6 @@ vim.g.mapleader = " "
 -- Saves when Leaving insert
 vim.api.nvim_command([[autocmd InsertLeave * :silent! wa]])
 
--- Changing key binds
--- Normal Mode
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "<C-b>", "<C-v>")
-vim.keymap.set("n", "H", "<cmd>bp<cr>")
-vim.keymap.set("n", "L", "<cmd>bn--<cr>")
-
--- Insert mode
-vim.keymap.set("i", "zz", "<Esc>zza")
 
 -- Global configurations
 vim.g.vimwiki_markdown_link_ext = 1
