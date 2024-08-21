@@ -2,15 +2,15 @@ local metadata = [[
 ---
 type: %s
 title: %s
-tags:  
+tags:
 ---
 
 ]]
 
 local function get_filetype()
-    local filetype = vim.bo.filetype
-    if filetype == "vimwiki" then
-      filetype = "md"
+  local filetype = vim.bo.filetype
+  if filetype == "vimwiki" then
+    filetype = "md"
     return filetype
   end
 end
@@ -28,22 +28,22 @@ local function get_title()
 end
 
 local function write_metadata(str)
-  vim.api.nvim_buf_set_lines(0,0,0, false, vim.split(str, "\n"))
+  vim.api.nvim_buf_set_lines(0, 0, 0, false, vim.split(str, "\n"))
 end
 
 local function change_cursor_position(x, y)
-  vim.api.nvim_win_set_cursor(0, {x, y})
+  vim.api.nvim_win_set_cursor(0, { x, y })
 end
 
-local function enter_insert_mode() 
+local function enter_insert_mode()
   vim.cmd("startinsert")
 end
 
 local function set_tab_target()
-  vim.keymap.set('i', '<Tab><Tab>', function ()
-   change_cursor_position(6,1)
-   vim.api.nvim_del_keymap('i', '<Tab><Tab>')
-  end, {noremap = true, silent= true})
+  vim.keymap.set('i', '<Tab><Tab>', function()
+    change_cursor_position(6, 1)
+    vim.api.nvim_del_keymap('i', '<Tab><Tab>')
+  end, { noremap = true, silent = true })
 end
 
 local function check_metadata()
@@ -57,8 +57,7 @@ local function check_metadata()
   end
 end
 
-vim.api.nvim_create_autocmd({"BufEnter"}, {
-  pattern = {"*.md", "*.yml", "*.yaml"},
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+  pattern = { "*.md", "*.yml", "*.yaml" },
   callback = check_metadata
 })
-
