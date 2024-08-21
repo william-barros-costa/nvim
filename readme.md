@@ -1,7 +1,7 @@
 ---
 type: md
-title: # Install
-tags: test
+title: Install
+tags: test 
 ---
 
 # Install

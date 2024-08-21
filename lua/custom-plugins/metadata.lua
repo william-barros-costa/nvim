@@ -4,6 +4,7 @@ type: %s
 title: %s
 tags:  
 ---
+
 ]]
 
 local function get_filetype()
@@ -40,8 +41,7 @@ end
 
 local function set_tab_target()
   vim.keymap.set('i', '<Tab><Tab>', function ()
-    print("called")
-   change_cursor_position(5,4)
+   change_cursor_position(6,1)
    vim.api.nvim_del_keymap('i', '<Tab><Tab>')
   end, {noremap = true, silent= true})
 end
