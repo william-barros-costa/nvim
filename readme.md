@@ -1,3 +1,9 @@
+---
+type: md
+title: # Install
+tags:  
+---
+
 # Install
 
 1. Configure the ssh tunnel
