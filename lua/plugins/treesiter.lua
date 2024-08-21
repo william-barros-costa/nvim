@@ -1,5 +1,6 @@
 return {
   "nvim-treesitter/nvim-treesitter",
+  dependencies = { "HiPhish/nvim-ts-rainbow2" },
   build = ":TSUpdate",
   config = function ()
     local configs = require("nvim-treesitter.configs")
@@ -8,6 +9,11 @@ return {
         sync_install = false,
         highlight = { enable = true },
         indent = { enable = true },
+        rainbow = {
+          enable = true,
+          query = "rainbow-parens",
+          strategy = require("ts-rainbow").strategy.global,
+          }
       })
-    end
+  end
 }
