@@ -22,7 +22,7 @@ local function save_image(name)
   local filename = vim.fn.expand("%:t"):match("^(.-)%.%w+$"):gsub(" ", "_") .. "_" .. name:gsub(" ", "_") .. ".png"
   local folder = "./img/"
   vim.fn.mkdir(folder, "p")
-  local handle = io.popen("cp '" .. image_path.. "' '" .. folder .. filename .. "'")
+  local handle = io.popen("cp '" .. image_path .. "' '" .. folder .. filename .. "'")
   handle:close()
   return folder .. filename
 end
@@ -42,9 +42,9 @@ local function encode_characters(html)
       cleaned_html = cleaned_html .. char -- append character to cleaned_html
     else
       if char == "<" then
-        char = "&lt;"                  -- replace '<' with HTML entity
+        char = "&lt;"                     -- replace '<' with HTML entity
       elseif char == ">" then
-        char = "&gt;"                  -- replace '>' with HTML entity
+        char = "&gt;"                     -- replace '>' with HTML entity
       end
       cleaned_html = cleaned_html .. char -- append character to cleaned_html
     end
@@ -140,11 +140,11 @@ end
 
 vim.keymap.set("n", "<leader>mp", paste_markdown_url, { noremap = true, silent = false })
 
-function test()
+local function test()
   paste_markdown_url()
 end
 
-function create_empty_file()
+local function create_empty_file()
   io.open(file_path, "w"):close()
 end
 
@@ -164,7 +164,7 @@ function CheckFileChage()
       if clipboard_content == "" then
         return
       end
-      
+
       print(clipboard_content)
       vim.fn.setreg("a", switch_url_with_text(remove_html_tags(clipboard_content)))
       create_empty_file()
