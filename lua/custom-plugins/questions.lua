@@ -1,3 +1,3 @@
--- vim.ui.input({prompt = 'Teste'}, function (value)
+vim.ui.input({prompt = 'Teste'}, function (value)
 
--- end)
+end)
