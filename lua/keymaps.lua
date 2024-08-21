@@ -14,6 +14,7 @@ keymap("n", "L", "<cmd>bn<cr>", opts)
 
 -- Insert mode
 keymap("i", "zz", "<Esc>zza", opts)
+keymap("i", "<leader>cp", "<C-x><C-f>", opts)
 
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
