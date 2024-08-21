@@ -8,11 +8,11 @@ return {
         null_ls.builtins.formatting.stylua,
         null_ls.builtins.formatting.black,
         null_ls.builtins.formatting.prettier,
-        null_ls.builtins.formatting.beautysh,
+        --null_ls.builtins.formatting.beautysh,
         null_ls.builtins.formatting.isort,
-        null_ls.builtins.diagnostics.eslint,
         null_ls.builtins.formatting.gofumpt,
         null_ls.builtins.formatting.goimports_reviser,
+        --null_ls.builtins.diagnostics.eslint,
       },
       on_attach = function(client, bufnr)
         if client.supports_method("textDocument/formatting") then
