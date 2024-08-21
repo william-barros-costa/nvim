@@ -2,7 +2,7 @@ local metadata = [[
 ---
 type: %s
 title: %s
-tags:
+tags:  
 ---
 ]]
 
@@ -16,6 +16,8 @@ local function check_metadata()
   local title = vim.fn.getreg('"'):gsub("%s+$", "")
   local final_string = string.format(metadata, filetype, title)
   vim.api.nvim_buf_set_lines(0,0,0, false, vim.split(final_string, "\n"))
+  vim.api.nvim_win_set_cursor(0, {4, ("tags: "):len()})
+  vim.cmd("startinsert")
   end
 end
 
