@@ -1,3 +1,4 @@
 return {
-  'jiangmiao/auto-pairs'
+  'altermo/ultimate-autopair.nvim',
+
 }
