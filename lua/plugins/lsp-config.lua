@@ -14,6 +14,14 @@ return {
     end,
   },
   {
+    "jay-babu/mason-null-ls.nvim",
+    config = function ()
+      require("mason-null-ls").setup({
+        ensure_installed = { "black" } 
+      })
+    end
+  },
+  {
     "neovim/nvim-lspconfig",
     config = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
