@@ -22,14 +22,17 @@ return {
       dap.listeners.before.event_exited.dapui_config = function()
         dapui.open()
       end
+
+
       vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint, {})
       vim.keymap.set("n", "<leader>dta", dap.clear_breakpoints, {})
       vim.keymap.set("n", "<leader>dc", dap.continue, {})
       vim.keymap.set("n", "<leader>dn", dap.step_over, {})
       vim.keymap.set("n", "<leader>di", dap.step_into, {})
       vim.keymap.set("n", "<leader>do", dap.step_out, {})
-      vim.keymap.set("n", "<leader>ds", function ()
+      vim.keymap.set("n", "<leader>ds", function()
         dap.terminate()
+        vim.wait(500, function() return false end, 500)
         dapui.close()
       end, {})
       vim.keymap.set("n", "<leader>dr", dap.repl.open, {})
@@ -67,6 +70,19 @@ return {
           program = "./${relativeFileDirname}"
         },
       }
+
+      local function add_go_dap_configuration()
+        local utils = require('utils')
+        table.insert(dap.configurations.go, {
+          type = "delve",
+          name = 'Debug with args',
+          request = 'launch',
+          program = '${file}',
+          args = utils.Split(vim.fn.input('args: '), "%S+")
+        })
+      end
+
+      vim.keymap.set("n", "<leader>daa", add_go_dap_configuration, {})
     end,
   },
 }
