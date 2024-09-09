@@ -1,42 +1,42 @@
 {
   "jcode": {
     "prefix": "jcode",
-    "body": ["```javascript\n$1\n```\n"],
+    "body": ["```javascript\n$0\n```\n"],
     "description": "Creates a javascript code block"
   },
  "pcode": {
     "prefix": "pcode",
-    "body": ["```python\n$1\n```\n"],
+    "body": ["```python\n$0\n```\n"],
     "description": "Creates a python code block"
   }, 
  "bcode":{
     "prefix": "bcode",
-    "body": ["```bash\n$1\n```\n"],
+    "body": ["```bash\n$0\n```\n"],
     "description": "Creates a bash code block"
   },
  "xcode":{
     "prefix": "xcode",
-    "body": ["```xml\n$1\n```\n"],
+    "body": ["```xml\n$0\n```\n"],
     "description": "Creates an xml code block"
   },
  "hcode":{
     "prefix": "hcode",
-    "body": ["```html\n$1\n```\n"],
+    "body": ["```html\n$0\n```\n"],
     "description": "Creates an html code block"
   }, 
   "scode":{
     "prefix": "scode",
-    "body": ["```sql\n$1\n```\n"],
+    "body": ["```sql\n$0\n```\n"],
     "description": "Creates an sql code block" 
   },
   "phcode":{ 
       "prefix": "phcode",
-      "body": ["```php\n$1\n```\n"],
+      "body": ["```php\n$0\n```\n"],
       "description": "Creates a php code block" 
     },
   "yamlcode":{ 
       "prefix": "yamlcode",
-      "body": ["```yaml\n$1\n```\n"],
+      "body": ["```yaml\n$0\n```\n"],
       "description": "Creates a php code block" 
     },
   "list-title":{ 
