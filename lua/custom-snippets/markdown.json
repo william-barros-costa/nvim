@@ -86,6 +86,7 @@
   },
     "kubernetes": {
     "prefix": "kb",
-    "body": ["apiVersion: $1\nkind: $2\n\tmetadata:\n\t\tname:$3\nspec:\n\t$0"],
+    "body": ["apiVersion: $1\nkind: $2\n\tmetadata:\n\t\tname: $3\nspec:\n\t$0"],
     "description": "Basic Kubernetes syntax"
+  }
 }
