@@ -15,9 +15,9 @@ return {
   },
   {
     "jay-babu/mason-null-ls.nvim",
-    config = function ()
+    config = function()
       require("mason-null-ls").setup({
-        ensure_installed = { "delve", "gofumpt", "djlint", "gotests", "gotestsum", "impl", "semgrep" } 
+        ensure_installed = { "delve", "gofumpt", "gotests", "gotestsum", "impl", }
       })
     end
   },
