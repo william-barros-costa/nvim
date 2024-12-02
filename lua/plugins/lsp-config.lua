@@ -6,10 +6,30 @@ return {
     end,
   },
   {
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
+    config = function()
+      require('mason-tool-installer').setup{
+        ensure_installed = {
+          'golangci-lint',
+          "lua_ls",
+          "marksman",
+          "gopls",
+          "delve",
+          "gofumpt",
+          "gotests",
+          "gotestsum",
+          "impl",
+        },
+        auto_update = true,
+        run_on_start = true,
+      }
+    end
+  },
+  {
     "williamboman/mason-lspconfig.nvim",
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "marksman", "gopls" },
+        ensure_installed = {},
       })
     end,
   },
@@ -17,7 +37,7 @@ return {
     "jay-babu/mason-null-ls.nvim",
     config = function()
       require("mason-null-ls").setup({
-        ensure_installed = { "delve", "gofumpt", "gotests", "gotestsum", "impl", }
+        ensure_installed = {}
       })
     end
   },
