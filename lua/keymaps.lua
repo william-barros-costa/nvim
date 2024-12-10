@@ -1,5 +1,5 @@
-local opts = {noremap=true, silent=true}
-local term_opts = {silent=true}
+local opts = { noremap = true, silent = true }
+local term_opts = { silent = true }
 
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
@@ -16,11 +16,32 @@ keymap("n", "L", "<cmd>bn<cr>", opts)
 keymap("i", "zz", "<Esc>zza", opts)
 keymap("i", "<C-f>", "<C-x><C-f>", opts)
 
+function navigate(direction)
+  local win_left = vim.fn.winnr(direction)
+  if win_left == vim.fn.winnr() then
+    if direction == "l" or direction == "h" then
+      vim.cmd("vsplit")
+    end
+    if direction == "j" or direction == "k" then
+      vim.cmd("split")
+    end
+  end
+  vim.cmd("wincmd " .. direction)
+end
+
 -- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+vim.keymap.set("n", "<C-h>", function()
+  navigate("h")
+end, opts)
+vim.keymap.set("n", "<C-j>", function()
+  navigate("j")
+end, opts)
+vim.keymap.set("n", "<C-k>", function()
+  navigate("k")
+end, opts)
+vim.keymap.set("n", "<C-l>", function()
+  navigate("l")
+end, opts)
 
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)
@@ -41,4 +62,15 @@ keymap("v", ">", ">gv", opts)
 keymap("v", "<A-j>", ":m .+1<cr>==", opts)
 keymap("v", "<A-k>", ":m .-2<cr>==", opts)
 keymap("v", "p", '"_dP', opts)
-
+keymap("v", "<A-k>", ":m .-2<cr>==", opts)
+keymap("v", "p", '"_dP', opts)
+keymap("v", "<A-k>", ":m .-2<cr>==", opts)
+keymap("v", "p", '"_dP', opts)
+keymap("v", "<A-k>", ":m .-2<cr>==", opts)
+keymap("v", "p", '"_dP', opts)
+keymap("v", "<A-k>", ":m .-2<cr>==", opts)
+keymap("v", "p", '"_dP', opts)
+keymap("v", "<A-k>", ":m .-2<cr>==", opts)
+keymap("v", "p", '"_dP', opts)
+keymap("v", "<A-k>", ":m .-2<cr>==", opts)
+keymap("v", "p", '"_dP', opts)

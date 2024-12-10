@@ -21,4 +21,4 @@ require("lazy").setup("plugins", {
 
 require("paste")
 require("custom-plugins")
-
+require("config")
