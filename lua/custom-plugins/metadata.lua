@@ -1,9 +1,9 @@
 local metadata = [[
----
-type: %s
-title: %s
-tags:
----
+# ---
+# type: %s
+# title: %s
+# tags:
+# ---
 
 ]]
 
