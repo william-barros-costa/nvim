@@ -1,5 +1,5 @@
 local wk = require("which-key")
-
+local lspconfig = require("lspconfig")
 local dap = require("dap")
 
 local function toggle_neotree()
@@ -27,19 +27,20 @@ wk.register({
   c = {
     name = "LSP",
     f = { vim.lsp.buf.format, "Format" },
+    a = { function ()
+      
+    end}
   },
   d = {
     name = "Dap",
     t = { dap.toggle_breakpoint, "Toggle Breakpoint" },
   },
-  n = {
-    name = "File Explorer",
-    n = { toggle_neotree, "Toggle File Explorer" },
-    c = {
-      function()
-        vim.api.nvim_command("Neotree close")
-      end,
-      "Close File Explorer",
-    },
-  },
+  n = { toggle_neotree, "Toggle File Explorer" },
+
+  --c = {
+  --  function()
+  --    vim.api.nvim_command("Neotree close")
+  --  end,
+  --  "Close File Explorer",
+  --},
 }, { prefix = "<leader>" })
