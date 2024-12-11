@@ -23,29 +23,13 @@ return {
         dapui.open()
       end
 
-
-      vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint, {})
-      vim.keymap.set("n", "<leader>dta", dap.clear_breakpoints, {})
-      vim.keymap.set("n", "<leader>dc", dap.continue, {})
-      vim.keymap.set("n", "<leader>dn", dap.step_over, {})
-      vim.keymap.set("n", "<leader>di", dap.step_into, {})
-      vim.keymap.set("n", "<leader>do", dap.step_out, {})
-      vim.keymap.set("n", "<leader>ds", function()
-        dap.terminate()
-        vim.wait(500, function() return false end, 500)
-        dapui.close()
-      end, {})
-      vim.keymap.set("n", "<leader>dr", dap.repl.open, {})
-      vim.keymap.set("n", "<leader>du", dap.up, {})
-      vim.keymap.set("n", "<leader>dd", dap.down, {})
-
       dap.adapters.delve = {
-        type = 'server',
-        port = '${port}',
+        type = "server",
+        port = "${port}",
         executable = {
-          command = 'dlv',
-          args = { 'dap', '-l', '127.0.0.1:${port}' },
-        }
+          command = "dlv",
+          args = { "dap", "-l", "127.0.0.1:${port}" },
+        },
       }
 
       dap.configurations.go = {
@@ -53,32 +37,32 @@ return {
           type = "delve",
           name = "Debug",
           request = "launch",
-          program = "${file}"
+          program = "${file}",
         },
         {
           type = "delve",
           name = "Debug Test",
           request = "launch",
           mode = "test",
-          program = "${file}"
+          program = "${file}",
         },
         {
           type = "delve",
           name = "Debug Test (go.mod)",
           request = "launch",
           mode = "test",
-          program = "./${relativeFileDirname}"
+          program = "./${relativeFileDirname}",
         },
       }
 
       local function add_go_dap_configuration()
-        local utils = require('utils')
+        local utils = require("utils")
         table.insert(dap.configurations.go, {
           type = "delve",
-          name = 'Debug with args',
-          request = 'launch',
-          program = '${file}',
-          args = utils.Split(vim.fn.input('args: '), "%S+")
+          name = "Debug with args",
+          request = "launch",
+          program = "${file}",
+          args = utils.Split(vim.fn.input("args: "), "%S+"),
         })
       end
 
