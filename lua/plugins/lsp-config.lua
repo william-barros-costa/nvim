@@ -25,6 +25,7 @@ return {
 					"delve",
 					"lua-language-server",
 					"goimports-reviser",
+          "yaml-language-server"
 				},
 				auto_update = true,
 				run_on_start = true,
