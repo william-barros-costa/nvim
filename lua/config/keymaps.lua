@@ -27,37 +27,29 @@ local function terminate_dap()
   dapui.close()
 end
 
-wk.register({
-  q = {
-    name = "Macros",
-    j = { "@q<cr>", "Repeats Macro stored on q register" },
-  },
-  c = {
-    name = "LSP",
-    f = { vim.lsp.buf.format, "Format" },
-    a = { vim.lsp.buf.code_action, "Code Actions" },
-    r = { vim.lsp.buf.rename, "Rename" },
-    n = {
-      name = "(Diagnostic) Go To",
-      n = { vim.diagnostic.goto_next, "(Diagnostic) Next" },
-      p = { vim.diagnostic.goto_next, "(Diagnostic) Previous" },
-    },
-    i = { vim.lsp.buf.hover, "Inspect" },
-    d = { vim.lsp.buf.definition, "Definition of Symbol" },
-    s = { vim.lsp.buf.declaration, "Declaration of symbol" },
-  },
-  d = {
-    name = "Debug",
-    t = { dap.toggle_breakpoint, "Toggle Breakpoint" },
-    d = { dap.clear_breakpoints, "Delete Breakpoints" },
-    c = { dap.continue, "Continue Execution" },
-    n = { dap.step_over("Step Over") },
-    i = { dap.step_into("Step Into") },
-    o = { dap.step_out("Step Out") },
-    s = { terminate_dap, "Terminate Execution" },
-    r = { dap.repl.open, "Open repl" },
-    k = { dap.up, "Go up" },
-    j = { dap.down, "Go down" },
-  },
-  n = { toggle_neotree, "Toggle File Explorer" },
-}, { prefix = "<leader>" })
+wk.add({
+  { "<leader>c",   group = "LSP" },
+  { "<leader>ca",  vim.lsp.buf.code_action,      desc = "Code Actions" },
+  { "<leader>cd",  vim.lsp.buf.definition,       desc = "Definition of Symbol" },
+  { "<leader>cf",  vim.lsp.buf.format,           desc = "Format" },
+  { "<leader>ci",  vim.lsp.buf.hover,            desc = "Inspect" },
+  { "<leader>cn",  group = "(Diagnostic) Go To" },
+  { "<leader>cnn", vim.diagnostic.goto_next,     desc = "(Diagnostic) Next" },
+  { "<leader>cnp", vim.diagnostic.goto_previous, desc = "(Diagnostic) Previous" },
+  { "<leader>cr",  vim.lsp.buf.rename,           desc = "Rename" },
+  { "<leader>cs",  vim.lsp.buf.declaration,      desc = "Declaration of symbol" },
+  { "<leader>d",   group = "Debug" },
+  { "<leader>dc",  dap.continue,                 desc = "Continue Execution" },
+  { "<leader>dd",  dap.clear_breakpoints,        desc = "Delete Breakpoints" },
+  { "<leader>dj",  dap.down,                     desc = "Go down" },
+  { "<leader>dk",  dap.up,                       desc = "Go up" },
+  { "<leader>dr",  dap.repl.open,                desc = "Open repl" },
+  { "<leader>ds",  terminate_dap,                desc = "Terminate Execution" },
+  { "<leader>dt",  dap.toggle_breakpoint,        desc = "Toggle Breakpoint" },
+  { "<leader>dn",  dap.step_over,                desc = "Step over" },
+  { "<leader>di",  dap.step_into,                desc = "Step into" },
+  { "<leader>do",  dap.step_out,                 desc = "Step out" },
+  { "<leader>q",   group = "Macros" },
+  { "<leader>qj",  "@q<cr>",                     desc = "Repeats Macro stored on q register" },
+  { "<leader>n",   toggle_neotree,               desc = "Toggle File Explorer" },
+})
