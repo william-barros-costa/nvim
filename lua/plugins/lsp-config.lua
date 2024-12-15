@@ -10,23 +10,34 @@ return {
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		config = function()
+			local default_tools = {
+				"lua_ls",
+				"marksman",
+				"lua-language-server",
+				"stylua",
+				"bash-language-server",
+				"marksman",
+				"pyright",
+				"stylua",
+			}
+			local env_tools = vim.split(os.getenv("MASON_TOOLS") or "", ",", { trimempty = true })
+
+			local combined_tools = vim.tbl_extend("force", default_tools, env_tools)
+
 			require("mason-tool-installer").setup({
-				ensure_installed = {
-					"golangci-lint",
-					"lua_ls",
-					"marksman",
-					"gopls",
-					"delve",
-					"gofumpt",
-					"gotests",
-					"gotestsum",
-					"impl",
-					"stylua",
-					"delve",
-					"lua-language-server",
-					"goimports-reviser",
-          "yaml-language-server"
-				},
+				ensure_installed = combined_tools,
+				--        ensure_installed = {
+				--          "golangci-lint",
+				--          "gopls",
+				--          "delve",
+				--          "gofumpt",
+				--          "gotests",
+				--          "gotestsum",
+				--          "impl",
+				--          "delve",
+				--          "goimports-reviser",
+				--          "yaml-language-server",
+				--        },
 				auto_update = true,
 				run_on_start = true,
 			})
