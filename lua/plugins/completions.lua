@@ -37,13 +37,13 @@ return {
 				mapping = cmp.mapping.preset.insert({
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<C-n>"] = cmp.select_next_item({ behavior = cmp.SelectBehaviour.Insert }),
-					["<C-p>"] = cmp.select_prev_item({ behavior = cmp.SelectBehaviour.Insert }),
+					["<C-n>"] = cmp.select_next_item({}),
+					["<C-p>"] = cmp.select_prev_item({}),
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<Esc>"] = cmp.mapping.close(),
 					["<Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
-							cmp.select_next_item({ behavior = cmp.SelectBehaviour.Insert })
+							cmp.select_next_item({})
 						elseif luasnip.expand_or_jumpable() then
 							luasnip.expand_or_jump()
 						elseif has_words_before() then
@@ -54,7 +54,7 @@ return {
 					end, { "i", "s" }),
 					["<S-Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
-							cmp.select_prev_item({ behavior = cmp.SelectBehaviour.Insert })
+							cmp.select_prev_item({})
 						elseif luasnip.jumpable(-1) then
 							luasnip.jump(-1)
 						else
@@ -62,7 +62,7 @@ return {
 						end
 					end, { "i", "s" }),
 					["<C-e>"] = cmp.mapping.abort(),
-					["<CR>"] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
+					["<CR>"] = cmp.mapping.confirm({ select = true }),
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp", priority = 99 },
