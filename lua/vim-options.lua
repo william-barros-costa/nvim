@@ -5,6 +5,7 @@ vim.cmd("set shiftwidth=2")
 vim.cmd("set clipboard^=unnamed,unnamedplus")
 vim.cmd("set number relativenumber")
 vim.g.mapleader = " "
+vim.g.tmux_navigator_no_mappings = 1
 
 -- Saves when Leaving insert
 vim.api.nvim_command([[autocmd InsertLeave * :silent! wa]])

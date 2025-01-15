@@ -31,7 +31,7 @@ local function capitalizeFirstLetter(str)
 	return str:sub(1, 1):upper() .. str:sub(2)
 end
 
-local function navigate(direction)
+function navigate(direction)
 	local tmux_direction = ({
 		["h"] = "left",
 		["j"] = "bottom",
@@ -39,14 +39,27 @@ local function navigate(direction)
 		["l"] = "right",
 	})[direction]
 	local has_nvim_window_on_direction = vim.fn.winnr(direction) ~= vim.fn.winnr()
-	local has_tmux_pane_on_direction = vim.fn.system('tmux display-message -p "#{pane_at_' .. tmux_direction .. '"')
-		== "0"
+	local has_tmux_pane_on_direction = string.find(
+		vim.fn.system('tmux display-message -p "#{pane_at_' .. tmux_direction .. '}"'),
+		"1"
+	) == nil
+
+	-- vim.api.nvim_echo({ { has_nvim_window_on_direction, "Normal" } }, true, {})
+	-- vim.api.nvim_echo({ { has_tmux_pane_on_direction, "Normal" } }, true, {})
+	vim.api.nvim_echo({ { vim.fn.system('tmux display-message -p "#{pane_at_' .. tmux_direction .. '}"') } }, true, {})
 
 	if has_nvim_window_on_direction then
 		vim.cmd("wincmd " .. direction)
 	elseif has_tmux_pane_on_direction then
-		vim.cmd("TmuxNavigate" .. capitalizeFirstLetter(tmux_direction))
+		local navigation_direction = ({
+			["h"] = "Left",
+			["j"] = "Down",
+			["k"] = "Up",
+			["l"] = "Right",
+		})[direction]
+		vim.cmd("TmuxNavigate" .. navigation_direction)
 	else
+		print("Going down")
 		vim.cmd(({
 			["h"] = "vsplit",
 			["j"] = "split",
@@ -81,33 +94,33 @@ wk.add({
 	{ "<leader>do", dap.step_out, desc = "Step out" },
 	{ "<leader>q", group = "Macros" },
 	{ "<leader>qj", "@q<cr>", desc = "Repeats Macro stored on q register" },
-	{ "<leader>n", toggle_neotree, desc = "Toggle File Explorer" },
+	{ "<leader>n", toggle_neotree, desc = "Toggle File Explorer",  },
 	{
 		"<C-h>",
 		function()
 			navigate("h")
 		end,
-		desc = "Navigate Left",
+		desc = "Navigate Left", noremap = true, silent = true
 	},
 	{
 		"<C-j>",
 		function()
 			navigate("j")
 		end,
-		desc = "Navigate Down",
+		desc = "Navigate Down", noremap = true, silent = true
 	},
 	{
 		"<C-k>",
 		function()
 			navigate("k")
 		end,
-		desc = "Navigate Up",
+		desc = "Navigate Up", noremap = true, silent = true
 	},
 	{
 		"<C-l>",
 		function()
 			navigate("l")
 		end,
-		desc = "Navigate Right",
+		desc = "Navigate Right", noremap = true, silent = true
 	},
 })
