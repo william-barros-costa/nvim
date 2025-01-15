@@ -44,10 +44,6 @@ function navigate(direction)
 		"1"
 	) == nil
 
-	-- vim.api.nvim_echo({ { has_nvim_window_on_direction, "Normal" } }, true, {})
-	-- vim.api.nvim_echo({ { has_tmux_pane_on_direction, "Normal" } }, true, {})
-	vim.api.nvim_echo({ { vim.fn.system('tmux display-message -p "#{pane_at_' .. tmux_direction .. '}"') } }, true, {})
-
 	if has_nvim_window_on_direction then
 		vim.cmd("wincmd " .. direction)
 	elseif has_tmux_pane_on_direction then
@@ -59,7 +55,6 @@ function navigate(direction)
 		})[direction]
 		vim.cmd("TmuxNavigate" .. navigation_direction)
 	else
-		print("Going down")
 		vim.cmd(({
 			["h"] = "vsplit",
 			["j"] = "split",
@@ -94,33 +89,41 @@ wk.add({
 	{ "<leader>do", dap.step_out, desc = "Step out" },
 	{ "<leader>q", group = "Macros" },
 	{ "<leader>qj", "@q<cr>", desc = "Repeats Macro stored on q register" },
-	{ "<leader>n", toggle_neotree, desc = "Toggle File Explorer",  },
+	{ "<leader>n", toggle_neotree, desc = "Toggle File Explorer" },
 	{
 		"<C-h>",
 		function()
 			navigate("h")
 		end,
-		desc = "Navigate Left", noremap = true, silent = true
+		desc = "Navigate Left",
+		noremap = true,
+		silent = true,
 	},
 	{
 		"<C-j>",
 		function()
 			navigate("j")
 		end,
-		desc = "Navigate Down", noremap = true, silent = true
+		desc = "Navigate Down",
+		noremap = true,
+		silent = true,
 	},
 	{
 		"<C-k>",
 		function()
 			navigate("k")
 		end,
-		desc = "Navigate Up", noremap = true, silent = true
+		desc = "Navigate Up",
+		noremap = true,
+		silent = true,
 	},
 	{
 		"<C-l>",
 		function()
 			navigate("l")
 		end,
-		desc = "Navigate Right", noremap = true, silent = true
+		desc = "Navigate Right",
+		noremap = true,
+		silent = true,
 	},
 })
