@@ -1,3 +1,10 @@
+# ---
+# type: md
+# title: Down
+# tags:
+# ---
+
+
 # Install
 
 1. Configure the ssh tunnel

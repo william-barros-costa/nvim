@@ -16,33 +16,21 @@ keymap("n", "L", "<cmd>bn<cr>", opts)
 keymap("i", "zz", "<Esc>zza", opts)
 keymap("i", "<C-f>", "<C-x><C-f>", opts)
 
-function navigate(direction)
-  local win_left = vim.fn.winnr(direction)
-  if win_left == vim.fn.winnr() then
-    if direction == "l" or direction == "h" then
-      vim.cmd("vsplit")
-    end
-    if direction == "j" or direction == "k" then
-      vim.cmd("split")
-    end
-  end
-  vim.cmd("wincmd " .. direction)
-end
 
 -- Better window navigation
-vim.keymap.set("n", "<C-h>", function()
-  navigate("h")
-end, opts)
-vim.keymap.set("n", "<C-j>", function()
-  navigate("j")
-end, opts)
-vim.keymap.set("n", "<C-k>", function()
-  navigate("k")
-end, opts)
-vim.keymap.set("n", "<C-l>", function()
-  navigate("l")
-end, opts)
-
+-- vim.keymap.set("n", "<C-h>", function()
+-- 	navigate("h")
+-- end, opts)
+-- vim.keymap.set("n", "<C-j>", function()
+-- 	navigate("j")
+-- end, opts)
+-- vim.keymap.set("n", "<C-k>", function()
+-- 	navigate("k")
+-- end, opts)
+-- vim.keymap.set("n", "<C-l>", function()
+-- 	navigate("l")
+-- end, opts)
+--
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)
 keymap("n", "<C-Down>", ":resize +2<CR>", opts)
