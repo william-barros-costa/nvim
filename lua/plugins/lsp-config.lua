@@ -11,7 +11,7 @@ return {
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		config = function()
 			local default_tools = {
-				"lua_ls",
+				--"lua_ls",
 				"marksman",
 				"lua-language-server",
 				"stylua",
