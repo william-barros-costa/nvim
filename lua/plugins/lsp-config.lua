@@ -48,12 +48,11 @@ return {
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-			local lspconfig = require("lspconfig")
-			lspconfig.lua_ls.setup({ capabilities = capabilities })
-			lspconfig.bashls.setup({ capabilities = capabilities })
-			lspconfig.marksman.setup({ capabilities = capabilities })
-			lspconfig.pyright.setup({ capabilities = capabilities })
-			lspconfig.gopls.setup({
+			vim.lsp.config("lua_ls", { capabilities = capabilities })
+			vim.lsp.config("bashls", { capabilities = capabilities })
+			vim.lsp.config("marksman", { capabilities = capabilities })
+			vim.lsp.config("pyright", { capabilities = capabilities })
+			vim.lsp.config("gopls", {
 				capabilities = capabilities,
 				settings = { gopls = { completeUnimported = true, usePlaceholders = true } },
 			})
